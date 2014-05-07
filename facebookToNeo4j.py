@@ -9,8 +9,8 @@ def executeCypherQuery(query): #function for executing queries on Neo4j
     result = neo4j.CypherQuery(graph_db, query).execute()
 
 #First, delete all nodes and relationships in Neo4j if they exist
-#executeCypherQuery("start r=relationship(*) delete r")
-#executeCypherQuery("MATCH n DELETE n")
+executeCypherQuery("start r=relationship(*) delete r")
+executeCypherQuery("MATCH n DELETE n")
 
 TOKEN = ""
 
@@ -27,15 +27,17 @@ personListB = []
 for friend in friendList['data']:
     print friend
     executeCypherQuery("CREATE (n:Person {name:\"" + friend["name"] + "\", id:\"" + friend["id"] + "\"})")
+
+for friend in friendList['data']:
     url = 'https://graph.facebook.com/me/mutualfriends/%d/' % int(friend['id'])
     parameters = {'access_token': TOKEN}
     r = requests.get(url, params = parameters)
     mutualFriendList = json.loads(r.text)
-    for mutualFriend in mutualFriendList["data"]:
+    for mutualfriend in mutualFriendList["data"]:
         if friend["id"] in personListB and mutualfriend["id"] in personListA: #If a relationship has already been added, this will be true
-            print "This relationship has already been added, do nothing."
+            print "This relationship has already been added, skipping..."
         else:
-            print "Added relationship between " + friend["id"] + " and " + mutualfriend["id"]
+            print "Added relationship between " + friend["name"] + " and " + mutualfriend["name"]
             executeCypherQuery("MATCH (a:Person), (b:Person) WHERE a.id = \"" + friend["id"] + "\" AND b.id = \"" + mutualfriend["id"] + "\"  CREATE (a)-[r:FRIEND]->(b)")
             personListA.append(friend["id"]) #Add the two people to the lists, to prevent adding the rel again
             personListB.append(mutualfriend["id"])
