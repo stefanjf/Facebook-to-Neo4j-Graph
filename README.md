@@ -32,8 +32,8 @@ TOKEN = 'INSERT FACEBOOK TOKEN HERE'
 ```
 
 ###2. Configure Neo4j Server IP
-If the neo4j server is running on localhost:7474, no action is needed.
-If the server is running on a different computer, insert the relevant IP address:
+If the neo4j server is running on localhost, no action is needed.
+If the server is running on a different computer, insert the relevant IP address.
 ```python
 #Remote Neo4j Server:
 graph_db = neo4j.GraphDatabaseService('<Server Address>')
@@ -46,4 +46,10 @@ graph_db = neo4j.GraphDatabaseService()
 python facebookToNeo4j.py
 ```
 
-##Enjoy!
+###4. View Graph Database
+In a browser, go to http://localhost:7474 to view your Facebook graph.
+
+
+Note: If the graph nodes display the Facebook id instead of the
+friend's name, you can click on any node and in the pop-up choose "Style" ->
+"caption" -> "name" to switch.
