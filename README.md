@@ -28,16 +28,19 @@ Head to [neo4j.org](www.neo4j.org) to download and install neo4j on your system.
 
 ###1. Add Facebook Token
 ```python
-TOKEN = '<INSERT FACEBOOK TOKEN HERE'
+TOKEN = 'INSERT FACEBOOK TOKEN HERE'
 ```
 
 ###2. Configure Neo4j Server IP
 If the neo4j server is running on localhost:7474, no action is needed.
 If the server is running on a different computer, insert the relevant IP address:
 ```python
+#Remote Neo4j Server:
 graph_db = neo4j.GraphDatabaseService('<Server Address>')
-```
 
+#Localhost:
+graph_db = neo4j.GraphDatabaseService()
+```
 ###3. Run facebookToNeo4j.py
 ```
 python facebookToNeo4j.py
