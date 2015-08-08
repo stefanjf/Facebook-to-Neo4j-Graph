@@ -1,3 +1,6 @@
+This script no longer works with the new Facebook user tokens. (Cannot get friends list from API)
+===
+
 Facebook to Neo4j Graph
 ============
 
